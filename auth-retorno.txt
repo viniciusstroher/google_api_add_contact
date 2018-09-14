@@ -1,6 +1,6 @@
 stdClass::__set_state(array(
-   'access_token' => 'ya29.GlsYBotpQxkxHoXWdkpa3fv37h04ODIuWiVRmci36UV-FwKoDMCJDBt-V7VULVF0sYVF5dchgUJTMy-fnCXTnRDj81JL6XzTv3CL0tYurfZb-rus49yUEYo9JPNO',
-   'expires_in' => 3586,
+   'access_token' => 'ya29.GlsYBj-fEZvDpdkTsryia7Tu2TqcUYWTKwWTM8s_FkAzgmNeKCWkycJcykkTeUhbH01yPUStApZQQcA_Q8JIP-yK20-9bzTMx2OGksEjMqyvAnlpq8-BPxOs-jFO',
+   'expires_in' => 3583,
    'scope' => 'https://www.googleapis.com/auth/contacts',
    'token_type' => 'Bearer',
 ))
