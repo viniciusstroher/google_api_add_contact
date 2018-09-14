@@ -5,6 +5,15 @@
 require_once 'utils.php';
 #O QUE VEM DO RETORNO .PHP
 
+
+$serializado = file_get_contents('obj-retorno.serializado');
+$obj 		 = unserialize($serializado);
+
+var_dump($obj);
+
+
+$auth_code   = $obj->request->code; 
+
 $fields = array(
 	'code' 			=> urlencode($auth_code),
 	'client_id' 	=> urlencode($google_client_id),
@@ -34,5 +43,10 @@ $response = json_decode($result);
 
 var_dump($response,$result);
 file_put_contents('auth-retorno.txt', var_export($response,true));
-exit;
 
+
+$obj 		  = new StdClass;
+$obj->request = $response;
+$serializado  = serialize($obj);
+// store $s somewhere where page2.php can find it.
+file_put_contents('obj-auth.serializado.txt', $serializado);

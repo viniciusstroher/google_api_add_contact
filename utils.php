@@ -2,9 +2,14 @@
 $max_results = 10;
 
 #achar os dados no projeto - configurar a mesma url
-$google_client_id = '231408011324-f039c8sr33ktgbipbuc249e74in518gm.apps.googleusercontent.com';
-$google_client_secret = 'pRItA1PTgdHcdO7On8pgWGTG';
-$google_redirect_uri = 'http://venizao.dlinkddns.com/google-api/retorno.php';
+// $google_client_id = '231408011324-f039c8sr33ktgbipbuc249e74in518gm.apps.googleusercontent.com';
+// $google_client_secret = 'pRItA1PTgdHcdO7On8pgWGTG';
+// $google_redirect_uri = 'http://venizao.dlinkddns.com/google-api/retorno.php';
+
+$google_client_id = '231408011324-d2cp54jcgksibdhh7aihmaprikftuceo.apps.googleusercontent.com';
+$google_client_secret = '9xnJ6Wbh9Jk3VZ47YZlKdPik';
+$google_redirect_uri = 'http://localhost/google-api/retorno.php';
+
 
 #pegar dados do token no key-retorno.txt
 $auth_code 			 = '4/WgCQHOwQyGVd6qt87ztsBQslooKSiROoQvjOMOwPz3FOJDRqOTVf8zmoMZ0uopLwOsL1A1elZjRKLvPn6dZpEBU';

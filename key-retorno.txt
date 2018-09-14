@@ -1,4 +1,0 @@
-array (
-  'code' => '4/WgCQHOwQyGVd6qt87ztsBQslooKSiROoQvjOMOwPz3FOJDRqOTVf8zmoMZ0uopLwOsL1A1elZjRKLvPn6dZpEBU',
-  'scope' => 'https://www.googleapis.com/auth/contacts',
-)

@@ -20,5 +20,7 @@ $client -> setScopes('https://www.google.com/m8/feeds');
  
 $googleImportUrl = $client->createAuthUrl();
 
+print "<br/><br/><br/><br/><br/>";
+
 print $googleImportUrl;
 
