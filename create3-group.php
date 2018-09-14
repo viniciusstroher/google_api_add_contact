@@ -36,6 +36,8 @@ file_put_contents('user-group-retorno.txt', var_export($result,true));
 
 
 
+//TESTAR GOOGLE PLAYGROUND
+#https://developers.google.com/oauthplayground/?code=4/WgABIs3s0cp_NJfrwhXJ8dyyBKX1JOECuISnfnymGw6gMytB4aWDnCH5rjGZtVzWD3ZoW9vRtUixIykJ0DtYI6U&scope=https://www.google.com/m8/feeds/#
 
 // PUT /m8/feeds/contacts/default/full/6976230c08eade30 HTTP/1.1
 // Host: www.google.com
