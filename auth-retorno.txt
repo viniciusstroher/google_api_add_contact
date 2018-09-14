@@ -1,0 +1,6 @@
+stdClass::__set_state(array(
+   'access_token' => 'ya29.GlsYBotpQxkxHoXWdkpa3fv37h04ODIuWiVRmci36UV-FwKoDMCJDBt-V7VULVF0sYVF5dchgUJTMy-fnCXTnRDj81JL6XzTv3CL0tYurfZb-rus49yUEYo9JPNO',
+   'expires_in' => 3586,
+   'scope' => 'https://www.googleapis.com/auth/contacts',
+   'token_type' => 'Bearer',
+))
