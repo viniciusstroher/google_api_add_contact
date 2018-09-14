@@ -1,13 +1,13 @@
 '<?xml version="1.0" encoding="UTF-8"?>
-<entry gd:etag="&quot;QXY5eTVSLit7I2A9XBVVGU4OTgE.&quot;" xmlns="http://www.w3.org/2005/Atom" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gContact="http://schemas.google.com/contact/2008" xmlns:gd="http://schemas.google.com/g/2005">
- <id>http://www.google.com/m8/feeds/contacts/viniciusferreirawk%40gmail.com/base/557dce168c40391b</id>
- <updated>2018-09-14T14:22:30.821Z</updated>
- <app:edited xmlns:app="http://www.w3.org/2007/app">2018-09-14T14:22:30.821Z</app:edited>
+<entry gd:etag="&quot;R3wzeDVSLit7I2A9XBVVGUkMRg0.&quot;" xmlns="http://www.w3.org/2005/Atom" xmlns:batch="http://schemas.google.com/gdata/batch" xmlns:gContact="http://schemas.google.com/contact/2008" xmlns:gd="http://schemas.google.com/g/2005">
+ <id>http://www.google.com/m8/feeds/contacts/viniciusferreirawk%40gmail.com/base/6223f890fdc4800</id>
+ <updated>2018-09-14T17:29:56.280Z</updated>
+ <app:edited xmlns:app="http://www.w3.org/2007/app">2018-09-14T17:29:56.280Z</app:edited>
  <category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/contact/2008#contact"/>
  <title>Vinicius RXC2 RCX IT2</title>
- <link rel="http://schemas.google.com/contacts/2008/rel#photo" type="image/*" href="https://www.google.com/m8/feeds/photos/media/viniciusferreirawk%40gmail.com/557dce168c40391b"/>
- <link rel="self" type="application/atom+xml" href="https://www.google.com/m8/feeds/contacts/viniciusferreirawk%40gmail.com/full/557dce168c40391b"/>
- <link rel="edit" type="application/atom+xml" href="https://www.google.com/m8/feeds/contacts/viniciusferreirawk%40gmail.com/full/557dce168c40391b"/>
+ <link rel="http://schemas.google.com/contacts/2008/rel#photo" type="image/*" href="https://www.google.com/m8/feeds/photos/media/viniciusferreirawk%40gmail.com/6223f890fdc4800"/>
+ <link rel="self" type="application/atom+xml" href="https://www.google.com/m8/feeds/contacts/viniciusferreirawk%40gmail.com/full/6223f890fdc4800"/>
+ <link rel="edit" type="application/atom+xml" href="https://www.google.com/m8/feeds/contacts/viniciusferreirawk%40gmail.com/full/6223f890fdc4800"/>
  <gd:name>
   <gd:fullName>Vinicius RXC2 RCX IT2</gd:fullName>
   <gd:givenName>Vinicius RXC2</gd:givenName>
