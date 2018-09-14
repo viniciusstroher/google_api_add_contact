@@ -1,4 +1,6 @@
 stdClass::__set_state(array(
-   'error' => 'invalid_request',
-   'error_description' => 'Missing required parameter: code',
+   'access_token' => 'ya29.GlsYBt0qJ8cLbTPqesELEFxIciXLygNbRZrXmRTJeRySTb1CfEe1Kl6HD050EWeSnXaUSjnMKInVmS2Cu5xZe5CfDyhdtcVSv72ndZ4ad7mUgVbBmEyMb2x5fP5O',
+   'expires_in' => 3599,
+   'scope' => 'https://www.googleapis.com/auth/contacts',
+   'token_type' => 'Bearer',
 ))

@@ -1,6 +1,23 @@
 <?php
 
 require_once 'utils.php';
+print "<pre>";
+
+$serializado = file_get_contents('obj-user.serializado');
+$obj 		 = unserialize($serializado);
+
+var_dump($obj->request);
+$xml = simplexml_load_string($str);
+
+/* find a specic hotel with name=Sands */
+$found = $xml->xpath('/hotels/hotel/name[.="Sands"]');
+
+/* order by date */
+$sort = array();
+foreach ($xml->hotel as $obj)
+{
+  $sort[(string)$obj->date] = $obj;
+}
 
 
 /**This is main script which is used for contact saving in account,variable declare before is passed here.***/

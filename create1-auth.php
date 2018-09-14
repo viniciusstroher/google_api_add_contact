@@ -4,15 +4,11 @@
 
 require_once 'utils.php';
 #O QUE VEM DO RETORNO .PHP
-
+print "<pre>";
 
 $serializado = file_get_contents('obj-retorno.serializado');
 $obj 		 = unserialize($serializado);
-
-var_dump($obj);
-
-
-$auth_code   = $obj->request->code; 
+$auth_code   = $obj->request['code']; 
 
 $fields = array(
 	'code' 			=> urlencode($auth_code),
@@ -49,4 +45,7 @@ $obj 		  = new StdClass;
 $obj->request = $response;
 $serializado  = serialize($obj);
 // store $s somewhere where page2.php can find it.
-file_put_contents('obj-auth.serializado.txt', $serializado);
+file_put_contents('obj-auth.serializado', $serializado);
+
+
+print "RODAR run2.php - SETAR OS NOMES A ENVIAR ANTES!";

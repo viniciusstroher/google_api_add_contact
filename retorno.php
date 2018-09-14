@@ -10,5 +10,6 @@ $obj->request = $_REQUEST;
 $serializado  = serialize($obj);
 // store $s somewhere where page2.php can find it.
 file_put_contents('obj-retorno.serializado', $serializado);
+print "<br/><br/><br/><br/> <pre>";
 
 require_once 'create1-auth.php';
