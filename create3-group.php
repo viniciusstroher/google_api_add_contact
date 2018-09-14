@@ -28,28 +28,33 @@ $idContact1 = str_replace("http://www.google.com/m8/feeds/contacts/$userEmail/ba
 </entry>';
 */
 // 2018-09-13T23:09:02.303Z
+// 2018-09-14T19:36:17.7200Z
+
+$nomeContato 	 = "Vinicius RXC2222";
+$enderecoContato = "POA RS2";
+$familyName 	 = "RCX IT2";
+$numeroTelefone  = "9541245988882";
+$emailNewContacs = 'viniciusferreirawk@gmail.com';
 
 $contactXML = '<?xml version="1.0" encoding="utf-8"?>
 	<entry gd:etag="{lastKnownEtag}">
   <id>'.$idContact.'</id>
-  <updated>'.date("Y-d-mTG:i:sz").'</updated>
+  <updated>'.$xml->updated.'</updated>
   <category scheme="http://schemas.google.com/g/2005#kind"
     term="http://schemas.google.com/contact/2008#contact"/>
   <gd:name>
-    <gd:givenName>New</gd:givenName>
-    <gd:familyName>Name</gd:familyName>
-    <gd:fullName>New Name</gd:fullName>
+    <gd:givenName>'.$nomeContato.'</gd:givenName>
+    <gd:familyName>'.$familyName.'</gd:familyName>
+    <gd:fullName>'.$nomeContato.'</gd:fullName>
   </gd:name>
-  <content type="text">Notes</content>
-  <link rel="http://schemas.google.com/contacts/2008/rel#photo" type="image/*"
-    href="https://www.google.com/m8/feeds/photos/media/'.$userEmail.'/'.$idContact1.'"/>
+
   <link rel="self" type="application/atom+xml"
     href="https://www.google.com/m8/feeds/contacts/'.$userEmail.'/full/'.$idContact1.'"/>
   <link rel="edit" type="application/atom+xml"
     href="https://www.google.com/m8/feeds/contacts/'.$userEmail.'/full/'.$idContact1.'"/>
   <gd:phoneNumber rel="http://schemas.google.com/g/2005#other"
-    primary="true">456-123-2133</gd:phoneNumber>
-  <gd:extendedProperty name="pet" value="hamster"/>
+    primary="true">'.$numeroTelefone.'</gd:phoneNumber>
+
   <gContact:groupMembershipInfo deleted="false"
     href="http://www.google.com/m8/feeds/groups/'.$userEmail.'/base/'.$groupId.'"/>
 </entry>';
@@ -61,9 +66,11 @@ $headers = array('Host: www.google.com',
 'Content-length: ' . strlen($contactXML),
 'Content-type: application/atom+xml',
 'If-match: *',
-'Authorization: OAuth ' . $acess_code);
-
-$contactQuery = 'https://www.google.com/m8/feeds/contacts/default/full/';
+'Authorization: OAuth ' . $acess_code
+ 
+);
+				
+$contactQuery = 'https://www.google.com/m8/feeds/contacts/default/full/'.$idContact1;
 $ch 		  = curl_init();
 
 curl_setopt($ch, CURLOPT_URL, $contactQuery);
@@ -77,9 +84,17 @@ curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 curl_setopt($ch, CURLOPT_TIMEOUT, 400);
 curl_setopt($ch, CURLOPT_FAILONERROR, true);
 
-$result = curl_exec($ch);
+$result 			= curl_exec($ch);
+$base_url 			= curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+$http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-var_dump($result);
+echo curl_errno($ch) . '<br/>';
+echo curl_error($ch) . '<br/>';
+
+
+var_dump($result,$http_response_code,$base_url);
+
+
 file_put_contents('user-group-retorno.txt', var_export($result,true));
 
 
