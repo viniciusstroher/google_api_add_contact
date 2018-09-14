@@ -61,12 +61,16 @@ $contactXML = '<?xml version="1.0" encoding="utf-8"?>
 
 print $contactXML;
 
+
+$serializado = file_get_contents('obj-auth.serializado');
+$obj2 		 = unserialize($serializado);
+
 $headers = array('Host: www.google.com',
 'Gdata-version: 3.0',
 'Content-length: ' . strlen($contactXML),
 'Content-type: application/atom+xml',
 'If-match: *',
-'Authorization: OAuth ' . $acess_code
+'Authorization: OAuth ' . $obj2->request->access_token
  
 );
 				
