@@ -14,4 +14,11 @@ $acess_code = 'ya29.GlsYBotpQxkxHoXWdkpa3fv37h04ODIuWiVRmci36UV-FwKoDMCJDBt-V7VU
 
 
 #pegar id dentro de user-retorno.txt - http://www.google.com/m8/feeds/contacts/viniciusferreirawk%40gmail.com/base/391e6fcf09d3530b -> 391e6fcf09d3530b
-$idgmail = '391e6fcf09d3530b';
+$idgmail 	 = '391e6fcf09d3530b';
+$groupId 	 = '6';
+$userEmail 	 = 'viniciusferreirawk@gmail.com';
+
+#USAR PLAYGROUND PARA LIST O GRUPO My contacts e pegar o ID
+#http://www.google.com/m8/feeds/groups/viniciusferreirawk%40gmail.com/base/6
+#https://stackoverflow.com/questions/39338209/how-delete-update-create-google-contacts-api-in-php
+#https://stackoverflow.com/questions/15566287/google-api-contacts-v-3-php-add-a-contact-to-the-group
