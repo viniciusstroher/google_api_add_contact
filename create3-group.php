@@ -65,5 +65,5 @@ file_put_contents('user-group-retorno.txt', var_export($result,true));
 //     primary="true">456-123-2133</gd:phoneNumber>
 //   <gd:extendedProperty name="pet" value="hamster"/>
 //   <gContact:groupMembershipInfo deleted="false"
-//     href="http://www.google.com/m8/feeds/groupsviniciusferreirawk%40gmail.com/base/6"/>
+//     href="http://www.google.com/m8/feeds/groups/viniciusferreirawk%40gmail.com/base/6"/>
 // </entry>
