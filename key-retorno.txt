@@ -1,4 +1,4 @@
 array (
-  'code' => '4/WgDzOb2IOOoUgU5B2rHKQFapeWcx5vF04xLNxQuECzPtPU_GHg4P6iu7-7GeoTgQZw3XOHKKcn5xS6yjnBCt2iI',
-  'scope' => 'https://www.googleapis.com/auth/contacts',
+  'code' => '4/XQB2EBJQ8DkTV6u0lBg-GBejzjNv7wBSbf3FaKg6Yo7uSKw3wGFzbPGTDVPNxXnbi1CuYVhzcqjAElQ8iTyBGZo',
+  'scope' => 'https://www.google.com/m8/feeds',
 )

@@ -14,7 +14,11 @@ $client->setApplicationName('My application name');
 $client->setClientid($google_client_id);
 $client->setClientSecret($google_client_secret);
 $client->setRedirectUri($google_redirect_uri);
-$client->setAccessType('online');
+ 
+$client->setDeveloperKey('AIzaSyAtH-MNXzh6YfNlBM2NYAtudsKCPYxBf2E');
+$client->setApprovalPrompt('force');
+// $client->setAccessType('online');
+$client->setAccessType('offline');
  
 $client -> setScopes('https://www.google.com/m8/feeds');
  

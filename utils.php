@@ -5,6 +5,7 @@ $max_results = 10;
 // $google_client_id = '231408011324-f039c8sr33ktgbipbuc249e74in518gm.apps.googleusercontent.com';
 // $google_client_secret = 'pRItA1PTgdHcdO7On8pgWGTG';
 // $google_redirect_uri = 'http://venizao.dlinkddns.com/google-api/retorno.php';
+$apiKey = 'AIzaSyAtH-MNXzh6YfNlBM2NYAtudsKCPYxBf2E';
 
 $google_client_id = '231408011324-d2cp54jcgksibdhh7aihmaprikftuceo.apps.googleusercontent.com';
 $google_client_secret = '9xnJ6Wbh9Jk3VZ47YZlKdPik';
