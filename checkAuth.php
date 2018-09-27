@@ -17,10 +17,19 @@
 	$client->setClientSecret('O3NKI8csGhuGD29H-vx9RPlZ');
 	$client->setRedirectUri('urn:ietf:wg:oauth:2.0:oob');
 	
+	//TOKEN GERADO SEMPRE PELO LINK GERADO
+	$authCode 	  = "4/aADsuTeDvdDf6Upuz0IJzyYBBlVmlfPblQJ9VfRXfsRfqwlBkLF5PBQ";
+	
+	$AccessToken  = "";
 
-	$authCode 	  = "4/aADe92SS-yo86Gv7SEhknqmBQQIBxEaPegdW431Mte1Hf9_SsJazv-w";
-	$r1 		  = $client->authenticate($authCode);
-	$r2 		  = $client->getAccessToken();
+	if($AccessToken == ""){
+		$googleImportUrl = $client->createAuthUrl();
+    }else{
+    	#AUTHCODE - PRECISA DO NUMERO Q FICA NO OAUTH DO GOOGLE SITE
+    	$client->authenticate($authCode);
+		$AccessToken = $client->getAccessToken();
+    }
+	
 	
 	var_dump($r1,$r2);
 ?>
