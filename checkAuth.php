@@ -3,6 +3,10 @@
 	#include_once "templates/base.php";
 	require_once 'utils.php';
 	
+	if(!file_exists("refreshToken.json")){
+
+		file_put_contents("refreshToken.json",json_encode(array('auth' => '', 'token' => '')));
+	}
 
 	function auth(){
 		$client = new Google_Client();
