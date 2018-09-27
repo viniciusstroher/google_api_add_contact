@@ -30,7 +30,9 @@ $client->setRedirectUri('urn:ietf:wg:oauth:2.0:oob');
 $client->setAccessType('offline');
 $client->setApprovalPrompt('force');
 
-$client->setScopes(['https://www.googleapis.com/auth/userinfo.profile', 'https://www.googleapis.com/auth/contacts', 'https://www.googleapis.com/auth/contacts.readonly']);
+$client->setScopes(['https://www.googleapis.com/auth/userinfo.profile', 
+					'https://www.googleapis.com/auth/contacts', 
+					'https://www.googleapis.com/auth/contacts.readonly']);
 
 
 ##https://console.developers.google.com/apis/credentials/oauthclient -> outro
