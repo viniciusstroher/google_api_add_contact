@@ -17,9 +17,10 @@
 	$client->setClientSecret('O3NKI8csGhuGD29H-vx9RPlZ');
 	$client->setRedirectUri('urn:ietf:wg:oauth:2.0:oob');
 	
-	
-	$authCode = "4/aADe92SS-yo86Gv7SEhknqmBQQIBxEaPegdW431Mte1Hf9_SsJazv-w";
-	$r 		  = $client->authenticate($authCode);
 
-	var_dump($r);
+	$authCode 	  = "4/aADe92SS-yo86Gv7SEhknqmBQQIBxEaPegdW431Mte1Hf9_SsJazv-w";
+	$r1 		  = $client->authenticate($authCode);
+	$r2 		  = $client->getAccessToken();
+	
+	var_dump($r1,$r2);
 ?>
