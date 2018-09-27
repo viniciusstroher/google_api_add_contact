@@ -86,6 +86,8 @@
 		curl_setopt($ch, CURLOPT_TIMEOUT, 400);
 		curl_setopt($ch, CURLOPT_FAILONERROR, true);
 		$result = curl_exec($ch);
+
+		var_dump($result);
     }
 
 
