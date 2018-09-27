@@ -20,16 +20,23 @@
 	//TOKEN GERADO SEMPRE PELO LINK GERADO
 	$authCode 	  = "4/aADsuTeDvdDf6Upuz0IJzyYBBlVmlfPblQJ9VfRXfsRfqwlBkLF5PBQ";
 	
-	$AccessToken  = "";
+	$AccessToken  	  = "";
+	$fileRefreshToken = file_get_contents("refreshToken.json");
+	$fileRefreshToken = json_decode($fileRefreshToken,true);
 
-	if($AccessToken == ""){
-		$googleImportUrl = $client->createAuthUrl();
-    }else{
+	if($fileRefreshToken['auth'] == ""){
+		print "ABRA O SITE E COLOQUE ESSE ENDEREÇO LOGO APOS COLE DENTRO DE AUTH NO refreshToken.json"."\n";
+		print $client->createAuthUrl();
+    }elseif ($fileRefreshToken['auth'] != "" && $fileRefreshToken['token'] == "") {
     	#AUTHCODE - PRECISA DO NUMERO Q FICA NO OAUTH DO GOOGLE SITE
-    	$client->authenticate($authCode);
-		$AccessToken = $client->getAccessToken();
+    	print "Gerando acess token do id \n";
+    	$client->authenticate($fileRefreshToken['auth']);
+		$fileRefreshToken['token'] = $client->getAccessToken();
+    	file_put_contents("refreshToken.json", json_encode($fileRefreshToken));
+    }else{
+    	print "Refresh token \n";
+    	$r = $client->refreshToken($fileRefreshToken['token']['access_token']);
+    	var_dump($r);
     }
-	
-	
-	var_dump($r1,$r2);
+
 ?>
