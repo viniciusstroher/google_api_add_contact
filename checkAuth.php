@@ -4,7 +4,6 @@
 	require_once 'utils.php';
 	
 	if(!file_exists("refreshToken.json")){
-
 		file_put_contents("refreshToken.json",json_encode(array('auth' => '', 'token' => '')));
 	}
 
@@ -32,7 +31,7 @@
 		$fileRefreshToken = json_decode($fileRefreshToken,true);
 
 		if($fileRefreshToken['auth'] == ""){
-			print "ABRA O SITE E COLOQUE ESSE ENDEREÇO LOGO APOS COLE DENTRO DE AUTH NO refreshToken.json"."\n";
+			print "ABRA O SITE E COLOQUE ESSE ENDEREÇO LOGO APOS COLE DENTRO DE AUTH NO refreshToken.json"."<br/>\n\n";
 			print $client->createAuthUrl();
 	    }elseif ($fileRefreshToken['auth'] != "" && $fileRefreshToken['token'] == "") {
 	    	#AUTHCODE - PRECISA DO NUMERO Q FICA NO OAUTH DO GOOGLE SITE
@@ -74,7 +73,7 @@
 		'Gdata-version: 3.0',
 		'Content-length: ' . strlen($contactXML),
 		'Content-type: application/atom+xml',
-		'Authorization: OAuth ' . $access_token);
+		'Authorization: Bearer ' . $access_token);
 
 		$contactQuery = 'https://www.google.com/m8/feeds/contacts/default/full/';
 		$ch = curl_init();
@@ -89,9 +88,11 @@
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 400);
 		curl_setopt($ch, CURLOPT_FAILONERROR, true);
-		$result = curl_exec($ch);
-
-		var_dump($result);
+		
+		$result 			= curl_exec($ch);
+		$base_url 			= curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+		$http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+		var_dump($result,$base_url,$http_response_code);
     }
 
 
