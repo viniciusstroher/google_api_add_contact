@@ -81,11 +81,6 @@
 	    	}
 			
 			
-			print "<pre>";
-			var_dump($response);
-			exit;
-			print "<pre>";
-			var_dump($userInfo);
 
 	    	print "<pre> Refresh token ".$r['id_token']." \n";
 	    	##############################
