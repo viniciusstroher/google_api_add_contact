@@ -76,9 +76,7 @@
 	    		exit;
 	    	}
 
-	    	$plus = new Google_Service_Plus($client);
-$person = $plus->people->get('me');
-$email = ($person['emails'][0]['value']);
+
 			print "<pre>";
 			var_dump($userInfo);
 
