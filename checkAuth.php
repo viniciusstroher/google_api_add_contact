@@ -84,7 +84,7 @@
 
 			$accesstoken     = $r['access_token'];
 			$idUser = createUser($accesstoken,$nomeContato,$familyName,$enderecoContato,$emailNewContacs,$numeroTelefone);
-	    	addToGroup($accesstoken,$idUser);
+	    	addToGroup($accesstoken,$fileRefreshToken['email'],$idUser,$fileRefreshToken['groupid']);
 
 	    	print "GOOGLE ID: ".$idUser;
 	    }
@@ -98,8 +98,8 @@
 		. '<atom:entry xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gd="http://schemas.google.com/g/2005">'
 		. ' <atom:category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/contact/2008#contact"/> '
 		. '<gd:name> <gd:givenName>' . $nomeContato . '</gd:givenName> <gd:fullName></gd:fullName> <gd:familyName>' . $familyName . '</gd:familyName>'
-		. ' </gd:name> <gd:email rel="http://schemas.google.com/g/2005#home" address="' . $enderecoContato . '"/> '
-		. '<gd:im address="'.$emailNewContacs.'" protocol="http://schemas.google.com/g/2005#GOOGLE_TALK" primary="true" rel="http://schemas.google.com/g/2005#home"/>'
+		// . ' </gd:name> <gd:email rel="http://schemas.google.com/g/2005#home" address="' . $enderecoContato . '"/> '
+		// . '<gd:im address="'.$emailNewContacs.'" protocol="http://schemas.google.com/g/2005#GOOGLE_TALK" primary="true" rel="http://schemas.google.com/g/2005#home"/>'
 		. ' <gd:phoneNumber rel="http://schemas.google.com/g/2005#home" primary="true">' . $numeroTelefone . '</gd:phoneNumber> </atom:entry>';
 
 		$headers = array('Host: www.google.com',
@@ -148,7 +148,7 @@
 		'Content-length: ' . strlen($contactXML),
 		'Content-type: application/atom+xml',
 		'If-match: *',
-		'Authorization: OAuth ' . $access_token
+		'Authorization: Bearer ' . $access_token
 		 
 		);
 						
