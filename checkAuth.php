@@ -90,7 +90,8 @@
 			var_dump('groupId',$groupId);
 	    	addToGroup($accesstoken,$fileRefreshToken['email'],$idUser,$groupId,$nomeContato,$numeroTelefone);
 
-	    	getContact($accesstoken,$idUser."@");
+	    	$contact = getContact($accesstoken,$idUser);
+	    	var_dump($contact);
 	    	print "GOOGLE ID: ".$idUser;
 	    }
     }
