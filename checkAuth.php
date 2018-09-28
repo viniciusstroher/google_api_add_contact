@@ -40,8 +40,7 @@
 							Google_Service_Oauth2::USERINFO_EMAIL,
 							'https://www.googleapis.com/auth/plus.profile.emails.read',
 							'https://www.googleapis.com/auth/plus.login', 
-							'https://www.googleapis.com/auth/userinfo.email',
-							'https://www.googleapis.com/plus/v1/people/me']);
+							'https://www.googleapis.com/auth/userinfo.email']);
 		//NOVO AUTH
 		$clinetScretFile = file_get_contents("client_secret.json");
 		$clinetScretFile = json_decode($clinetScretFile,true);
