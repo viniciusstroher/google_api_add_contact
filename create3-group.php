@@ -2,7 +2,7 @@
 
 require_once 'utils.php';
 print "<pre>";
-
+xml
 $serializado = file_get_contents('obj-user.serializado');
 $obj 		 = unserialize($serializado);
 

@@ -1,6 +1,8 @@
 <?php
 	include_once __DIR__ . '/google-api-php-client-2.2.2_PHP54/src/Google/autoload.php';
 	
+	#MUDAR O EMAIL
+	
 	if(!file_exists("refreshToken.json")){
 		file_put_contents("refreshToken.json",json_encode(array('auth' => '', 'token' => '')));
 	}
@@ -8,11 +10,14 @@
 	if(isset($_POST['auth'])){
 		$fileRefreshToken['auth']  = $_POST['auth'];
 		$fileRefreshToken['token'] = "";
+		$fileRefreshToken['email'] = $_POST['email'];
+		$fileRefreshToken['groupid'] = $_POST['groupid'];
+		
 		file_put_contents("refreshToken.json", json_encode($fileRefreshToken));
 	}
 
 	function printForm(){
-    	print "<form method='post'><input type='text' name='auth' placeholder='digite o id do site do google aquio' /><br/><button>Sakvar!</button></form>";
+    	print "<form method='post'><input type='text' name='auth' placeholder='digite o id do site do google aquio' /><br/><input type='text' name='email' placeholder='digite o seu email' /><br/><input type='text' name='groupid' placeholder='digite o id do group - pesquisar no ouath playground' /><br/><button>Sakvar!</button></form>";
     }
 
 	function auth(){
@@ -31,6 +36,8 @@
 		$client->setClientSecret('O3NKI8csGhuGD29H-vx9RPlZ');
 		$client->setRedirectUri('urn:ietf:wg:oauth:2.0:oob');
 		
+
+
 		//TOKEN GERADO SEMPRE PELO LINK GERADO
 		$authCode 	  = "4/aADsuTeDvdDf6Upuz0IJzyYBBlVmlfPblQJ9VfRXfsRfqwlBkLF5PBQ";
 		
@@ -45,7 +52,7 @@
 
 	    }elseif ($fileRefreshToken['auth'] != "" && $fileRefreshToken['token'] == "") {
 	    	#AUTHCODE - PRECISA DO NUMERO Q FICA NO OAUTH DO GOOGLE SITE
-	    	print "Gerando acess token do id \n";
+	    	print "<pre> Gerando acess token do id \n";
 	    	$client->authenticate($fileRefreshToken['auth']);
 			$fileRefreshToken['token'] = $client->getAccessToken();
 	    	file_put_contents("refreshToken.json", json_encode($fileRefreshToken));
@@ -57,12 +64,16 @@
 	    		#limap expirado
 	    		$fileRefreshToken['auth']  = "";
 	    		$fileRefreshToken['token'] = "";
+	    		$fileRefreshToken['email'] = "";
+	    		$fileRefreshToken['groupid'] = "";
+	    		
 	    		file_put_contents("refreshToken.json", json_encode($fileRefreshToken));
 	    		exit;
 	    	}
 
-	    	print "Refresh token ".$r['id_token']." \n";
+	    	print "<pre> Refresh token ".$r['id_token']." \n";
 	    	##############################
+			# COLOCAR ESSES DADOS VINDOS DO SISTEMA"
 			##############################
 			
 			$nomeContato 	 = "RCX - ".rand()." Contato";
@@ -72,7 +83,10 @@
 			$emailNewContacs = 'viniciusferreirawk@gmail.com';
 
 			$accesstoken     = $r['access_token'];
-			createUser($accesstoken,$nomeContato,$familyName,$enderecoContato,$emailNewContacs,$numeroTelefone);
+			$idUser = createUser($accesstoken,$nomeContato,$familyName,$enderecoContato,$emailNewContacs,$numeroTelefone);
+	    	addToGroup($accesstoken,$idUser);
+
+	    	print "GOOGLE ID: ".$idUser;
 	    }
     }
 
@@ -111,9 +125,51 @@
 		$result 			= curl_exec($ch);
 		$base_url 			= curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
 		$http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-		var_dump($result,$base_url,$http_response_code);
+		#var_dump($result,$base_url,$http_response_code);
+    	$xml = simplexml_load_string($result);
+    	// var_dump($xml);
+    	return str_replace("http://www.google.com/m8/feeds/contacts/viniciusferreirawk%40gmail.com/base/", "", $xml->id);
+
     }
 
+    function addToGroup($access_token,$email,$idGoogle,$groupId){
+    	
+    	$contactXML = '<?xml version="1.0" encoding="utf-8"?>
+						<entry gd:etag="{lastKnownEtag}">
+					  <id>'.$idGoogle.'</id>
+					  
+					  <gContact:groupMembershipInfo deleted="false"
+					    href="http://www.google.com/m8/feeds/groups/'.urlencode($email).'/base/'.$groupId.'"/>
+					</entry>';
 
+		
+		$headers = array('Host: www.google.com',
+		'Gdata-version: 3.0',
+		'Content-length: ' . strlen($contactXML),
+		'Content-type: application/atom+xml',
+		'If-match: *',
+		'Authorization: OAuth ' . $access_token
+		 
+		);
+						
+		$contactQuery = 'https://www.google.com/m8/feeds/contacts/default/full/'.$idGoogle;
+		$ch 		  = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, $contactQuery);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $contactXML);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 400);
+		curl_setopt($ch, CURLOPT_FAILONERROR, true);
+
+		$result 			= curl_exec($ch);
+		$base_url 			= curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+		$http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    	var_dump($result,$base_url,$http_response_code);
+    }
     auth();
 ?>
