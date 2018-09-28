@@ -11,13 +11,12 @@
 		$fileRefreshToken['auth']  = $_POST['auth'];
 		$fileRefreshToken['token'] = "";
 		$fileRefreshToken['email'] = $_POST['email'];
-		$fileRefreshToken['groupid'] = $_POST['groupid'];
 		
 		file_put_contents("refreshToken.json", json_encode($fileRefreshToken));
 	}
 
 	function printForm(){
-    	print "<form method='post'><input type='text' name='auth' placeholder='digite o id do site do google aquio' /><br/><input type='text' name='email' placeholder='digite o seu email' /><br/><input type='text' name='groupid' placeholder='digite o id do group - pesquisar no ouath playground' /><br/><button>Sakvar!</button></form>";
+    	print "<form method='post'><input type='text' name='auth' placeholder='digite o id do site do google aquio' /><br/><input type='text' name='email' placeholder='digite o seu email' /><br/><button>Sakvar!</button></form>";
     }
 
 	function auth(){
@@ -65,7 +64,6 @@
 	    		$fileRefreshToken['auth']  = "";
 	    		$fileRefreshToken['token'] = "";
 	    		$fileRefreshToken['email'] = "";
-	    		$fileRefreshToken['groupid'] = "";
 	    		
 	    		file_put_contents("refreshToken.json", json_encode($fileRefreshToken));
 	    		exit;
@@ -89,6 +87,7 @@
 			$idUser = createUser($accesstoken,$nomeContato,$familyName,$enderecoContato,$emailNewContacs,$numeroTelefone);
 	    	
 			$groupId = getGroupId($accesstoken,$fileRefreshToken['email']);
+			var_dump('groupId',$groupId);
 	    	addToGroup($accesstoken,$fileRefreshToken['email'],$idUser,$groupId,$nomeContato,$numeroTelefone);
 
 	    	getContact($accesstoken,$idUser."@");
@@ -231,7 +230,7 @@
 		$xml = simplexml_load_string($result);
 
 		try{
-			return str_replace("http://www.google.com/m8/feeds/groups/".urlencode($email)."/", 
+			return str_replace("http://www.google.com/m8/feeds/groups/base/".urlencode($email)."/", 
 								"", 
 								$xml->entry[0]->id[0]);
 		}catch(Exception $ex){
