@@ -1,4 +1,0 @@
-array (
-  'code' => '4/ZwA-QasXHe6nLp9VndEY1i1YoPK7ReWoDe4zE-Qjpl9rxE3OZpM1os_DhsxSruOCmTv0DQe_7Nd85tbPhKmA4Is',
-  'scope' => 'https://www.google.com/m8/feeds',
-)
