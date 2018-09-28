@@ -1,8 +1,15 @@
 <?php
 	include_once __DIR__ . '/google-api-php-client-2.2.2_PHP54/src/Google/autoload.php';
 	
-	#MUDAR O EMAIL
-	
+
+	#ACESSAR !!! PARA GERAR A CHAVE USAR OUTRO
+	##https://console.developers.google.com/apis/credentials/oauthclient -> outro
+	##https://console.developers.google.com/apis/credentials/oauthclient -> outro
+	if(!file_exists("client_secret.json")){
+		print "BAIXE O JSON DO SITE E RENOMEIE PARA client_secret.json <a href='https://console.developers.google.com/apis/credentials'/>Link</a>";
+		exit;
+	}
+
 	if(!file_exists("refreshToken.json")){
 		file_put_contents("refreshToken.json",json_encode(array('auth' => '', 'token' => '')));
 	}
@@ -21,7 +28,7 @@
 
 	function auth(){
 		$client = new Google_Client();
-		$client->setApplicationName('My application name');
+		$client->setApplicationName('RCX');
 
 		// $client->setClientid($google_client_id);
 		// $client->setClientSecret($google_client_secret);
@@ -31,15 +38,14 @@
 						'https://www.googleapis.com/auth/contacts', 
 						'https://www.googleapis.com/auth/contacts.readonly']);
 		//NOVO AUTH
-		$client->setClientId('231408011324-qmsva7kdink9apksa1arrpvcd66hi372.apps.googleusercontent.com');
-		$client->setClientSecret('O3NKI8csGhuGD29H-vx9RPlZ');
+		$clinetScretFile = file_get_contents("client_secret.json");
+		$clinetScretFile = json_decode($clinetScretFile,true);
+
+		$client->setClientId($clinetScretFile['installed']['client_id']);
+		$client->setClientSecret($clinetScretFile['installed']['client_secret']);
 		$client->setRedirectUri('urn:ietf:wg:oauth:2.0:oob');
 		
 
-
-		//TOKEN GERADO SEMPRE PELO LINK GERADO
-		$authCode 	  = "4/aADsuTeDvdDf6Upuz0IJzyYBBlVmlfPblQJ9VfRXfsRfqwlBkLF5PBQ";
-		
 		$AccessToken  	  = "";
 		$fileRefreshToken = file_get_contents("refreshToken.json");
 		$fileRefreshToken = json_decode($fileRefreshToken,true);
