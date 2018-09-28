@@ -71,7 +71,7 @@
 			$numeroTelefone  = "515959959595";
 			$emailNewContacs = 'viniciusferreirawk@gmail.com';
 
-			$accesstoken     = $r['id_token'];
+			$accesstoken     = $r['access_token'];
 			createUser($accesstoken,$nomeContato,$familyName,$enderecoContato,$emailNewContacs,$numeroTelefone);
 	    }
     }
