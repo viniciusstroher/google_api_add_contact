@@ -230,7 +230,7 @@
 		$xml = simplexml_load_string($result);
 
 		try{
-			return str_replace("http://www.google.com/m8/feeds/groups/base/".urlencode($email)."/", 
+			return str_replace("http://www.google.com/m8/feeds/groups/".urlencode($email)."/base/", 
 								"", 
 								$xml->entry[0]->id[0]);
 		}catch(Exception $ex){
