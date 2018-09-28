@@ -87,7 +87,9 @@
 
 			//ADICIONAR RETORNO DO SISTEMA AQUI !!!!
 			$idUser = createUser($accesstoken,$nomeContato,$familyName,$enderecoContato,$emailNewContacs,$numeroTelefone);
-	    	addToGroup($accesstoken,$fileRefreshToken['email'],$idUser,$fileRefreshToken['groupid'],$nomeContato,$numeroTelefone);
+	    	
+			$groupId = getGroupId($accesstoken,$fileRefreshToken['email']);
+	    	addToGroup($accesstoken,$fileRefreshToken['email'],$idUser,$groupId,$nomeContato,$numeroTelefone);
 
 	    	getContact($accesstoken,$idUser."@");
 	    	print "GOOGLE ID: ".$idUser;
@@ -202,6 +204,40 @@
 
 		$xml = simplexml_load_string($result);
 		return $xml;
+    }
+
+    function getGroupId($access_token,$email){
+    	$headers = array('Host: www.google.com',
+				 'Authorization: Bearer ' . $access_token,
+				 'GData-Version: 3.0');
+
+		$contactQuery = "https://www.google.com/m8/feeds/groups/default/full/";
+		$ch 		  = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, $contactQuery);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 400);
+		curl_setopt($ch, CURLOPT_FAILONERROR, true);
+
+		$result 			= curl_exec($ch);
+		$base_url 			= curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+		$http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		$xml = simplexml_load_string($result);
+
+		try{
+			return str_replace("http://www.google.com/m8/feeds/groups/".urlencode($email)."/", 
+								"", 
+								$xml->entry[0]->id[0]);
+		}catch(Exception $ex){
+			return 0;
+		}
+		
     }
 
     auth();
