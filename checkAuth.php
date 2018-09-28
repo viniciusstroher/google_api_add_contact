@@ -55,7 +55,7 @@
 		$fileRefreshToken = json_decode($fileRefreshToken,true);
 
 		if($fileRefreshToken['auth'] == ""){
-			print "ABRA O SITE E COLOQUE ESSE ENDEREÇO LOGO APOS COLE DENTRO DE AUTH NO refreshToken.json"."<br/>\n\n";
+			print "ABRA O SITE E COLOQUE ESSE ENDEREÇO: "."<br/>\n\n";
 			print "<a target='_blank' href='".$client->createAuthUrl()."'>Acesse aqui</a>";
 			printForm();
 
