@@ -6,7 +6,7 @@
 	##https://console.developers.google.com/apis/credentials/oauthclient -> outro
 	##https://console.developers.google.com/apis/credentials/oauthclient -> outro
 	if(!file_exists("client_secret.json")){
-		print "BAIXE O JSON DO SITE E RENOMEIE PARA client_secret.json <a href='https://console.developers.google.com/apis/credentials'/>Link</a>";
+		print "BAIXE O JSON DO SITE E RENOMEIE PARA client_secret.json <a target='_blank' href='https://console.developers.google.com/apis/credentials'/>Link</a>";
 		exit;
 	}
 
@@ -56,7 +56,7 @@
 
 		if($fileRefreshToken['auth'] == ""){
 			print "ABRA O SITE E COLOQUE ESSE ENDEREÇO LOGO APOS COLE DENTRO DE AUTH NO refreshToken.json"."<br/>\n\n";
-			print "<a href='".$client->createAuthUrl()."'>Acesse aqui</a>";
+			print "<a target='_blank' href='".$client->createAuthUrl()."'>Acesse aqui</a>";
 			printForm();
 
 	    }elseif ($fileRefreshToken['auth'] != "" && $fileRefreshToken['token'] == "") {
