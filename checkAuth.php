@@ -1,11 +1,19 @@
 <?php
 	include_once __DIR__ . '/google-api-php-client-2.2.2_PHP54/src/Google/autoload.php';
-	#include_once "templates/base.php";
-	require_once 'utils.php';
 	
 	if(!file_exists("refreshToken.json")){
 		file_put_contents("refreshToken.json",json_encode(array('auth' => '', 'token' => '')));
 	}
+
+	if(isset($_POST['auth'])){
+		$fileRefreshToken['auth']  = $_POST['auth'];
+		$fileRefreshToken['token'] = "";
+		file_put_contents("refreshToken.json", json_encode($fileRefreshToken));
+	}
+
+	function printForm(){
+    	print "<form method='post'><input type='text' name='auth' placeholder='digite o id do site do google aquio' /><br/><button>Sakvar!</button></form>";
+    }
 
 	function auth(){
 		$client = new Google_Client();
@@ -33,6 +41,8 @@
 		if($fileRefreshToken['auth'] == ""){
 			print "ABRA O SITE E COLOQUE ESSE ENDEREÇO LOGO APOS COLE DENTRO DE AUTH NO refreshToken.json"."<br/>\n\n";
 			print $client->createAuthUrl();
+			printForm();
+
 	    }elseif ($fileRefreshToken['auth'] != "" && $fileRefreshToken['token'] == "") {
 	    	#AUTHCODE - PRECISA DO NUMERO Q FICA NO OAUTH DO GOOGLE SITE
 	    	print "Gerando acess token do id \n";
@@ -42,6 +52,15 @@
 	    }else{
 	    	
 	    	$r = $client->refreshToken($fileRefreshToken['token']['access_token']);
+	    	var_dump($r);
+	    	if(isset($r['error'])){
+	    		#limap expirado
+	    		$fileRefreshToken['auth']  = "";
+	    		$fileRefreshToken['token'] = "";
+	    		file_put_contents("refreshToken.json", json_encode($fileRefreshToken));
+	    		exit;
+	    	}
+
 	    	print "Refresh token ".$r['id_token']." \n";
 	    	##############################
 			##############################
