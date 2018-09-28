@@ -36,7 +36,8 @@
 		// $client->setDeveloperKey('AIzaSyAtH-MNXzh6YfNlBM2NYAtudsKCPYxBf2E');
 		$client->setScopes(['https://www.googleapis.com/auth/userinfo.profile', 
 						'https://www.googleapis.com/auth/contacts', 
-						'https://www.googleapis.com/auth/contacts.readonly']);
+						'https://www.googleapis.com/auth/contacts.readonly',
+							Google_Service_Oauth2::USERINFO_EMAIL]);
 		//NOVO AUTH
 		$clinetScretFile = file_get_contents("client_secret.json");
 		$clinetScretFile = json_decode($clinetScretFile,true);
@@ -74,6 +75,12 @@
 	    		file_put_contents("refreshToken.json", json_encode($fileRefreshToken));
 	    		exit;
 	    	}
+
+	    	$plus = new Google_Service_Plus($client);
+$person = $plus->people->get('me');
+$email = ($person['emails'][0]['value']);
+			print "<pre>";
+			var_dump($userInfo);
 
 	    	print "<pre> Refresh token ".$r['id_token']." \n";
 	    	##############################
