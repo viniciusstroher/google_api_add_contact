@@ -37,7 +37,11 @@
 		$client->setScopes(['https://www.googleapis.com/auth/userinfo.profile', 
 						'https://www.googleapis.com/auth/contacts', 
 						'https://www.googleapis.com/auth/contacts.readonly',
-							Google_Service_Oauth2::USERINFO_EMAIL]);
+							Google_Service_Oauth2::USERINFO_EMAIL,
+							'https://www.googleapis.com/auth/plus.profile.emails.read',
+							'https://www.googleapis.com/auth/plus.login', 
+							'https://www.googleapis.com/auth/userinfo.email',
+							'https://www.googleapis.com/plus/v1/people/me']);
 		//NOVO AUTH
 		$clinetScretFile = file_get_contents("client_secret.json");
 		$clinetScretFile = json_decode($clinetScretFile,true);
@@ -75,8 +79,11 @@
 	    		file_put_contents("refreshToken.json", json_encode($fileRefreshToken));
 	    		exit;
 	    	}
-
-
+			
+			
+			print "<pre>";
+			var_dump($response);
+			exit;
 			print "<pre>";
 			var_dump($userInfo);
 
