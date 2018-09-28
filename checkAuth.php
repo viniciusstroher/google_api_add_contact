@@ -83,9 +83,13 @@
 			$emailNewContacs = 'viniciusferreirawk@gmail.com';
 
 			$accesstoken     = $r['access_token'];
+			
+
+			//ADICIONAR RETORNO DO SISTEMA AQUI !!!!
 			$idUser = createUser($accesstoken,$nomeContato,$familyName,$enderecoContato,$emailNewContacs,$numeroTelefone);
 	    	addToGroup($accesstoken,$fileRefreshToken['email'],$idUser,$fileRefreshToken['groupid'],$nomeContato,$numeroTelefone);
 
+	    	getContact($accesstoken,$idUser."@");
 	    	print "GOOGLE ID: ".$idUser;
 	    }
     }
@@ -95,7 +99,7 @@
     	
 		$access_token = $accesstoken;
 		$contactXML = '<?xml version="1.0" encoding="utf-8"?> '
-		. '<atom:entry xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gd="http://schemas.google.com/g/2005">'
+		. '<atom:entry xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gd="http://schemas .google.com/g/2005">'
 		. ' <atom:category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/contact/2008#contact"/> '
 		. '<gd:name> <gd:givenName>' . $nomeContato . '</gd:givenName>'
 		. ' </gd:name> '
@@ -171,7 +175,34 @@
 		$result 			= curl_exec($ch);
 		$base_url 			= curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
 		$http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    	var_dump($result,$base_url,$http_response_code);
+    	// var_dump($result,$base_url,$http_response_code);
     }
+
+    function getContact($access_token,$contactId){
+    	$headers = array('Host: www.google.com',
+				 'Authorization: Bearer ' . $access_token,
+				 'GData-Version: 3.0');
+
+		$contactQuery = "https://www.google.com/m8/feeds/contacts/default/full/$contactId";
+		$ch 		  = curl_init();
+
+		curl_setopt($ch, CURLOPT_URL, $contactQuery);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 400);
+		curl_setopt($ch, CURLOPT_FAILONERROR, true);
+
+		$result 			= curl_exec($ch);
+		$base_url 			= curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+		$http_response_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+		$xml = simplexml_load_string($result);
+		return $xml;
+    }
+
     auth();
 ?>
