@@ -84,7 +84,7 @@
 
 			$accesstoken     = $r['access_token'];
 			$idUser = createUser($accesstoken,$nomeContato,$familyName,$enderecoContato,$emailNewContacs,$numeroTelefone);
-	    	addToGroup($accesstoken,$fileRefreshToken['email'],$idUser,$fileRefreshToken['groupid']);
+	    	addToGroup($accesstoken,$fileRefreshToken['email'],$idUser,$fileRefreshToken['groupid'],$nomeContato,$numeroTelefone);
 
 	    	print "GOOGLE ID: ".$idUser;
 	    }
@@ -97,9 +97,8 @@
 		$contactXML = '<?xml version="1.0" encoding="utf-8"?> '
 		. '<atom:entry xmlns:atom="http://www.w3.org/2005/Atom" xmlns:gd="http://schemas.google.com/g/2005">'
 		. ' <atom:category scheme="http://schemas.google.com/g/2005#kind" term="http://schemas.google.com/contact/2008#contact"/> '
-		. '<gd:name> <gd:givenName>' . $nomeContato . '</gd:givenName> <gd:fullName></gd:fullName> <gd:familyName>' . $familyName . '</gd:familyName>'
-		// . ' </gd:name> <gd:email rel="http://schemas.google.com/g/2005#home" address="' . $enderecoContato . '"/> '
-		// . '<gd:im address="'.$emailNewContacs.'" protocol="http://schemas.google.com/g/2005#GOOGLE_TALK" primary="true" rel="http://schemas.google.com/g/2005#home"/>'
+		. '<gd:name> <gd:givenName>' . $nomeContato . '</gd:givenName>'
+		. ' </gd:name> '
 		. ' <gd:phoneNumber rel="http://schemas.google.com/g/2005#home" primary="true">' . $numeroTelefone . '</gd:phoneNumber> </atom:entry>';
 
 		$headers = array('Host: www.google.com',
@@ -132,12 +131,15 @@
 
     }
 
-    function addToGroup($access_token,$email,$idGoogle,$groupId){
+    function addToGroup($access_token,$email,$idGoogle,$groupId,$name,$phone){
     	
     	$contactXML = '<?xml version="1.0" encoding="utf-8"?>
 						<entry gd:etag="{lastKnownEtag}">
 					  <id>'.$idGoogle.'</id>
-					  
+					    <gd:name>
+    						<gd:givenName>'.$name.'</gd:givenName>
+    					</gd:name>
+    					<gd:phoneNumber rel="http://schemas.google.com/g/2005#other" primary="true">'.$phone.'</gd:phoneNumber>
 					  <gContact:groupMembershipInfo deleted="false"
 					    href="http://www.google.com/m8/feeds/groups/'.urlencode($email).'/base/'.$groupId.'"/>
 					</entry>';
